@@ -21,9 +21,9 @@ t() {
         printf 'Expected: %s\n' "$2" >&2
     fi
     if [ "$2" = "$exp" ]; then
-        printf 'Succeeded\n'
+        printf 'Succeeded: '\''%s'\''\n' "$1"
     else
-        printf 'Failed\n'
+        printf 'Failed: '\''%s'\''\n' "$1"
     fi
 }
 
