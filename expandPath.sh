@@ -20,6 +20,9 @@ expandPath() {
       "~-"/*)
         path=$OLDPWD/${path#"~-/"}
         ;;
+      "~")
+        path=$HOME
+        ;;
       "~"/*)
         path=$HOME/${path#"~/"}
         ;;
