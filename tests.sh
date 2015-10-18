@@ -37,6 +37,7 @@ name4="~testuser/Documents/double  spaced"
 t "$name1" "$(strexp "$name1")"
 t "$name2" "$(strexp "$name2")"
 t "$name3" "$(strexp "$name3")"
+t "$name4" "$(strexp "$name4")"
 t "~"          "$HOME"
 t "~/"         "$HOME/"
 t "~crl"       ~crl
