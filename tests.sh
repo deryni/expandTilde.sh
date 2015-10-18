@@ -7,6 +7,11 @@ fi
 
 . expandPath.sh
 
+strexp() {
+    local v=$(printf %q "$1")
+    eval echo "${v/#\\~/"~"}"
+}
+
 t() {
     exp=$(expandPath "$1")
     if [ "$v" ]; then
@@ -29,9 +34,9 @@ name2="~crl/Documents/double  spaced"
 name3="/work/whiffle/two  spaces  are  better  than one"
 name4="~testuser/Documents/double  spaced"
 
-t "$name1"
-t "$name2"
-t "$name3"
+t "$name1" "$(strexp "$name1")"
+t "$name2" "$(strexp "$name2")"
+t "$name3" "$(strexp "$name3")"
 t "~"          "$HOME"
 t "~/"         "$HOME/"
 t "~crl"       ~crl
