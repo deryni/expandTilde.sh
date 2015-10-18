@@ -50,8 +50,6 @@ pushd /opt >/dev/null
 pushd /var >/dev/null
 pushd "$o" >/dev/null
 
-printf '\ndirs: %s\n' "$(dirs)"
-
 t  '~1'  ~1
 t '~+1' ~+1
 t '~-1' ~-1
