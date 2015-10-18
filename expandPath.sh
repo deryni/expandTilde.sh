@@ -36,7 +36,7 @@ expandPath() {
         else
           path=${DIRSTACK[@]: -($num+1):1}
         fi
-        : ${path:=$opath}
+        : "${path:=$opath}"
         ;;
       "~"*)
         username=${path%%/*}
