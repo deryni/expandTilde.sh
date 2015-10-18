@@ -30,10 +30,12 @@ expandPath() {
         username=${path%%/*}
         username=${username#"~"}
         IFS=: read _ _ _ _ _ homedir _ < <(getent passwd "$username")
-        if [[ $path = */* ]]; then
-          path=${homedir}/${path#*/}
-        else
-          path=$homedir
+        if [ "$homedir" ]; then
+            if [[ $path = */* ]]; then
+              path=${homedir}/${path#*/}
+            else
+              path=$homedir
+            fi
         fi
         ;;
     esac
