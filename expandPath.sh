@@ -26,6 +26,18 @@ expandPath() {
       "~"/*)
         path=$HOME/${path#"~/"}
         ;;
+      "~"[0-9]|"~"[+-][0-9])
+        num=${path#"~"}
+        op=${num%%[0-9]*}
+        num=${num#[+-]}
+        local opath=$path
+        if [ "${op:-+}" = "+" ]; then
+          path=${DIRSTACK[@]: $num:1}
+        else
+          path=${DIRSTACK[@]: -($num+1):1}
+        fi
+        : ${path:=$opath}
+        ;;
       "~"*)
         username=${path%%/*}
         username=${username#"~"}
