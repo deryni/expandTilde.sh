@@ -9,13 +9,13 @@ expandPath() {
     : "$path"
     case $path in
       "~+")
-        path=$PWD/${path#"~+"}
+        path=$PWD
         ;;
       "~+"/*)
         path=$PWD/${path#"~+/"}
         ;;
       "~-")
-        path=$OLDPWD/${path#"~-"}
+        path=$OLDPWD
         ;;
       "~-"/*)
         path=$OLDPWD/${path#"~-/"}
