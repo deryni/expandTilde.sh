@@ -7,11 +7,6 @@ fi
 
 . expandPath.sh
 
-name1="~/Documents/over  enthusiastic"
-name2="~crl/Documents/double  spaced"
-name3="/work/whiffle/two  spaces  are  better  than one"
-name4="~testuser/Documents/double  spaced"
-
 t() {
     exp=$(expandPath "$1")
     if [ "$v" ]; then
@@ -28,6 +23,11 @@ t() {
 }
 
 cd /tmp; cd -
+
+name1="~/Documents/over  enthusiastic"
+name2="~crl/Documents/double  spaced"
+name3="/work/whiffle/two  spaces  are  better  than one"
+name4="~testuser/Documents/double  spaced"
 
 t "$name1"
 t "$name2"
