@@ -8,8 +8,14 @@ expandPath() {
   for path in "${pathElements[@]}"; do
     : "$path"
     case $path in
+      "~+")
+        path=$PWD/${path#"~+"}
+        ;;
       "~+"/*)
         path=$PWD/${path#"~+/"}
+        ;;
+      "~-")
+        path=$OLDPWD/${path#"~-"}
         ;;
       "~-"/*)
         path=$OLDPWD/${path#"~-/"}
