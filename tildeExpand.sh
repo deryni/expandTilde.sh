@@ -27,8 +27,8 @@ expandPath() {
         path=$HOME/${path#"~/"}
         ;;
       "~"[0-9]|"~"[+-][0-9])
-        num=${path#"~"}
-        op=${num%%[0-9]*}
+        local num=${path#"~"}
+        local op=${num%%[0-9]*}
         num=${num#[+-]}
         local opath=$path
         if [ "$op" = "-" ]; then
@@ -38,7 +38,7 @@ expandPath() {
         : "${path:=$opath}"
         ;;
       "~"*)
-        username=${path%%/*}
+        local username=${path%%/*}
         username=${username#"~"}
         IFS=: read _ _ _ _ _ homedir _ < <(getent passwd "$username")
         if [ "$homedir" ]; then
