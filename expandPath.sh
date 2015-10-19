@@ -31,11 +31,10 @@ expandPath() {
         op=${num%%[0-9]*}
         num=${num#[+-]}
         local opath=$path
-        if [ "${op:-+}" = "+" ]; then
-          path=${DIRSTACK[@]: $num:1}
-        else
-          path=${DIRSTACK[@]: -($num+1):1}
+        if [ "$op" = "-" ]; then
+          ((num+=1))
         fi
+        path=${DIRSTACK[@]: $op$num:1}
         : "${path:=$opath}"
         ;;
       "~"*)
