@@ -31,6 +31,10 @@ ta() {
     t expandAssign "$@"
 }
 
+ts() {
+    t expandString "$@"
+}
+
 cd /tmp; cd -
 
 name1="~/Documents/over  enthusiastic"
@@ -52,6 +56,13 @@ ta "~+"         ~+
 ta "~+/plus"    ~+/plus
 ta "~-"         ~-
 ta "~-/minus"   ~-/minus
+
+pt='~/foo:~/bar:~/baz'
+ps=$(strexp "$pt")
+pa=~/foo:~/bar:~/baz
+
+ts "$pt" "$ps"
+ta "$pt" "$pa"
 
 o=$PWD
 pushd / >/dev/null
