@@ -1,11 +1,10 @@
 #!/bin/bash
 
-expandPath() {
+doExpand() {
   local path
-  local -a pathElements resultPathElements
-  IFS=':' read -r -a pathElements <<<"$1"
-  : "${pathElements[@]}"
-  for path in "${pathElements[@]}"; do
+  local -a resultPathElements
+
+  for path in "$@"; do
     : "$path"
     case $path in
       "~+")
@@ -55,4 +54,11 @@ expandPath() {
   local result
   printf -v result '%s:' "${resultPathElements[@]}"
   printf '%s\n' "${result%:}"
+}
+
+expandPath() {
+  local -a pathElements
+  IFS=':' read -r -a pathElements <<<"$1"
+  : "${pathElements[@]}"
+  doExpand "${pathElements[@]}"
 }
