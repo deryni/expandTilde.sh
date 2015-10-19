@@ -62,3 +62,7 @@ expandAssign() {
   : "${pathElements[@]}"
   doExpand "${pathElements[@]}"
 }
+
+expandString() {
+    doExpand "$1"
+}
