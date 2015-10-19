@@ -13,7 +13,7 @@ strexp() {
 }
 
 t() {
-    exp=$(expandPath "$1")
+    exp=$(expandAssign "$1")
     if [ "$v" ]; then
         printf \\n >&2
         printf 'Original: %s\n' "$1" >&2

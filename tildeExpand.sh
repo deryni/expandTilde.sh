@@ -56,7 +56,7 @@ doExpand() {
   printf '%s\n' "${result%:}"
 }
 
-expandPath() {
+expandAssign() {
   local -a pathElements
   IFS=':' read -r -a pathElements <<<"$1"
   : "${pathElements[@]}"
