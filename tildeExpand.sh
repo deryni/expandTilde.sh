@@ -20,7 +20,7 @@ doExpand() {
         path=$OLDPWD/${path#"~-/"}
         ;;
       "~")
-        path=$HOME
+        path=${HOME-~}
         ;;
       "~"/*)
         path=$HOME/${path#"~/"}
