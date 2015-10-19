@@ -5,7 +5,7 @@ if [ "$1" = "-v" ]; then
     shift
 fi
 
-. tildeExpand.sh
+. ./tildeExpand.sh
 
 strexp() {
     local v=$(printf %q "$1")
