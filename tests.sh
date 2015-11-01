@@ -8,7 +8,8 @@ fi
 . ./tildeExpand.sh
 
 strexp() {
-    local v=$(printf %q "$1")
+    local v
+    v=$(printf %q "$1")
     eval echo "${v/#\\~/"~"}"
 }
 
@@ -37,6 +38,8 @@ ts() {
 
 cd /tmp; cd -
 
+# shellcheck disable=SC2088
+{
 name1="~/Documents/over  enthusiastic"
 name2="~crl/Documents/double  spaced"
 name3="/work/whiffle/two  spaces  are  better  than one"
@@ -80,5 +83,6 @@ ta '~-2' ~-2
 ta  '~8'  ~8
 ta '~+8' ~+8
 ta '~-8' ~-8
+}
 
 (unset -v HOME; ta '~' ~)
