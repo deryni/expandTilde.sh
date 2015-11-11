@@ -58,7 +58,7 @@ doExpand() {
 
 expandAssign() {
   local -a pathElements
-  IFS=':' read -r -a pathElements <<<"$1"
+  IFS=: read -r -a pathElements <<<"$1"
   : "${pathElements[@]}"
   doExpand "${pathElements[@]}"
 }
