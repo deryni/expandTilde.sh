@@ -27,15 +27,8 @@ doExpand() {
         ;;
       "~"*)
         local username=${path%%/*}
-        username=${username#"~"}
-        IFS=: read -r _ _ _ _ _ homedir _ < <(getent passwd "$username")
-        if [ "$homedir" ]; then
-            if [[ $path = */* ]]; then
-              path=${homedir}/${path#*/}
-            else
-              path=$homedir
-            fi
-        fi
+        IFS=: read -r _ _ _ _ _ homedir _ < <(getent passwd "${username:1}")
+        path=${homedir:-${path%%/*}}${path#$username}
         ;;
     esac
     resultPathElements+=( "$path" )
