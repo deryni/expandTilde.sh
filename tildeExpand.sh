@@ -23,7 +23,7 @@ doExpand() {
         path=${HOME-~}
         ;;
       "~"/*)
-        path=$HOME/${path#"~/"}
+        path=${HOME-~}/${path#"~/"}
         ;;
       "~"[0-9]|"~"[+-][0-9])
         local num=${path#"~"}
