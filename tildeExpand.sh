@@ -12,13 +12,11 @@ doExpand() {
         ;;
       "~"[0-9]|"~"[+-][0-9])
         local num=${path#"~"}
-        local op=${num%%[0-9]*}
-        num=${num#[+-]}
-        local opath=$path
-        if [ "$op" = "-" ]; then
-          ((num+=1))
+        if [ "${num:0:1}" = "-" ]; then
+          ((num-=1))
         fi
-        path=${DIRSTACK[@]:$op$num:1}
+        local opath=$path
+        path=${DIRSTACK[@]:$num:1}
         : "${path:=$opath}"
         ;;
       "~+"*)
