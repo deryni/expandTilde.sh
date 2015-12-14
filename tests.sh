@@ -67,6 +67,8 @@ ts "~crl"       ~crl
 ts "~crl/"      ~crl/
 ts "~nobody"    ~nobody
 ts "~nobody/"   ~nobody/
+ts "~foo-bar"    ~foo-bar
+ts "~foo-bar/"   ~foo-bar/
 ts "~+"         ~+
 ts "~+0"        ~+0
 ts "~+/plus"    ~+/plus
