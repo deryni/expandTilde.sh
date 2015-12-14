@@ -18,7 +18,7 @@ doExpand() {
         if [ "$op" = "-" ]; then
           ((num+=1))
         fi
-        path=${DIRSTACK[@]: $op$num:1}
+        path=${DIRSTACK[@]:$op$num:1}
         : "${path:=$opath}"
         ;;
       "~+"*)
