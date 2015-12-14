@@ -36,7 +36,7 @@ ts() {
     t expandString "$@"
 }
 
-cd /tmp; cd -
+cd /tmp; cd - >/dev/null
 
 # shellcheck disable=SC2088
 {
