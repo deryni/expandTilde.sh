@@ -8,10 +8,10 @@ doExpand() {
         : "$path"
         case $path in
             "~"|"~"/*)
-                path=${HOME-~}${path#"~"}
+                path=${HOME-~}${path:1}
                 ;;
             "~"[0-9]|"~"[+-][0-9])
-                local num=${path#"~"}
+                local num=${path:1}
                 if [ "${num:0:1}" = "-" ]; then
                     ((num-=1))
                 fi
