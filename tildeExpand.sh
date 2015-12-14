@@ -22,10 +22,10 @@ doExpand() {
         : "${path:=$opath}"
         ;;
       "~+"*)
-        path=$PWD${path#"~+"}
+        path=$PWD${path:2}
         ;;
       "~-"*)
-        path=${OLDPWD:-"~-"}${path#"~-"}
+        path=${OLDPWD:-${path:0:2}}${path:2}
         ;;
       "~"*)
         local username=${path%%/*}
