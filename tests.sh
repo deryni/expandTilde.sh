@@ -36,14 +36,19 @@ ts() {
     t expandString "$@"
 }
 
-cd /tmp; cd - >/dev/null
-
 # shellcheck disable=SC2088
 {
 name1="~/Documents/over  enthusiastic"
 name2="~crl/Documents/double  spaced"
 name3="/work/whiffle/two  spaces  are  better  than one"
 name4="~testuser/Documents/double  spaced"
+
+ts "~+"         ~+
+ts "~+/plus"    ~+/plus
+ts "~-"         ~-
+ts "~-/minus"   ~-/minus
+
+cd /tmp; cd - >/dev/null
 
 ts "$name1" "$(strexp "$name1")"
 ts "$name2" "$(strexp "$name2")"
