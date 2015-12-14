@@ -86,3 +86,4 @@ ta '~-8' ~-8
 }
 
 (unset -v HOME; ta '~' ~)
+(unset -v HOME; ta '~/foo' ~/foo)
