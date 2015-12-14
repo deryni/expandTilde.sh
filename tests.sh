@@ -42,6 +42,7 @@ name1="~/Documents/over  enthusiastic"
 name2="~crl/Documents/double  spaced"
 name3="/work/whiffle/two  spaces  are  better  than one"
 name4="~nobody/Documents/double  spaced"
+name5="~nobody/Documents:~nobody/me~some~tildes~"
 
 ts "~+"         ~+
 ts "~+/plus"    ~+/plus
@@ -54,6 +55,7 @@ ts "$name1" "$(strexp "$name1")"
 ts "$name2" "$(strexp "$name2")"
 ts "$name3" "$(strexp "$name3")"
 ts "$name4" "$(strexp "$name4")"
+ts "$name5" "$(strexp "$name5")"
 ts "~"          "$HOME"
 ts "~/"         "$HOME/"
 ts "~crl"       ~crl
