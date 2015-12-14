@@ -7,12 +7,6 @@ doExpand() {
   for path in "$@"; do
     : "$path"
     case $path in
-      "~+"|"~+"/*)
-        path=$PWD${path#"~+"}
-        ;;
-      "~-"|"~-"/*)
-        path=$OLDPWD${path#"~-"}
-        ;;
       "~"|"~"/*)
         path=${HOME-~}${path#"~"}
         ;;
@@ -26,6 +20,12 @@ doExpand() {
         fi
         path=${DIRSTACK[@]: $op$num:1}
         : "${path:=$opath}"
+        ;;
+      "~+"*)
+        path=$PWD${path#"~+"}
+        ;;
+      "~-"*)
+        path=$OLDPWD${path#"~-"}
         ;;
       "~"*)
         local username=${path%%/*}
