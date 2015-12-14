@@ -7,23 +7,14 @@ doExpand() {
   for path in "$@"; do
     : "$path"
     case $path in
-      "~+")
-        path=$PWD
+      "~+"|"~+"/*)
+        path=$PWD${path#"~+"}
         ;;
-      "~+"/*)
-        path=$PWD/${path#"~+/"}
+      "~-"|"~-"/*)
+        path=$OLDPWD${path#"~-"}
         ;;
-      "~-")
-        path=$OLDPWD
-        ;;
-      "~-"/*)
-        path=$OLDPWD/${path#"~-/"}
-        ;;
-      "~")
-        path=${HOME-~}
-        ;;
-      "~"/*)
-        path=${HOME-~}/${path#"~/"}
+      "~"|"~"/*)
+        path=${HOME-~}${path#"~"}
         ;;
       "~"[0-9]|"~"[+-][0-9])
         local num=${path#"~"}
