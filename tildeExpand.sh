@@ -12,6 +12,10 @@ tildecase() {
             fi
             local opath=$path
             path=${DIRSTACK[@]:$num:1}
+            # Handle the "special" case of ${DIRSTACK[0]} using unexpanded ~.
+            if [ "${path:0:1}" = "~" ]; then
+                tildecase "$path"
+            fi
             : "${path:=$opath}"
             ;;
         "~+"*)
