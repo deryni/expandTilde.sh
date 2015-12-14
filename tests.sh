@@ -41,7 +41,7 @@ ts() {
 name1="~/Documents/over  enthusiastic"
 name2="~crl/Documents/double  spaced"
 name3="/work/whiffle/two  spaces  are  better  than one"
-name4="~testuser/Documents/double  spaced"
+name4="~nobody/Documents/double  spaced"
 
 ts "~+"         ~+
 ts "~+/plus"    ~+/plus
@@ -58,8 +58,8 @@ ts "~"          "$HOME"
 ts "~/"         "$HOME/"
 ts "~crl"       ~crl
 ts "~crl/"      ~crl/
-ts "~testuser"  ~testuser
-ts "~testuser/" ~testuser/
+ts "~nobody"    ~nobody
+ts "~nobody/"   ~nobody/
 ts "~+"         ~+
 ts "~+/plus"    ~+/plus
 ts "~-"         ~-
