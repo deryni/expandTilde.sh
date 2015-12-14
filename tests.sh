@@ -45,20 +45,20 @@ name2="~crl/Documents/double  spaced"
 name3="/work/whiffle/two  spaces  are  better  than one"
 name4="~testuser/Documents/double  spaced"
 
-ta "$name1" "$(strexp "$name1")"
-ta "$name2" "$(strexp "$name2")"
-ta "$name3" "$(strexp "$name3")"
-ta "$name4" "$(strexp "$name4")"
-ta "~"          "$HOME"
-ta "~/"         "$HOME/"
-ta "~crl"       ~crl
-ta "~crl/"      ~crl/
-ta "~testuser"  ~testuser
-ta "~testuser/" ~testuser/
-ta "~+"         ~+
-ta "~+/plus"    ~+/plus
-ta "~-"         ~-
-ta "~-/minus"   ~-/minus
+ts "$name1" "$(strexp "$name1")"
+ts "$name2" "$(strexp "$name2")"
+ts "$name3" "$(strexp "$name3")"
+ts "$name4" "$(strexp "$name4")"
+ts "~"          "$HOME"
+ts "~/"         "$HOME/"
+ts "~crl"       ~crl
+ts "~crl/"      ~crl/
+ts "~testuser"  ~testuser
+ts "~testuser/" ~testuser/
+ts "~+"         ~+
+ts "~+/plus"    ~+/plus
+ts "~-"         ~-
+ts "~-/minus"   ~-/minus
 
 pt='~/foo:~/bar:~/baz'
 ps=$(strexp "$pt")
@@ -74,15 +74,15 @@ pushd /opt >/dev/null
 pushd /var >/dev/null
 pushd "$o" >/dev/null
 
-ta  '~1'  ~1
-ta '~+1' ~+1
-ta '~-1' ~-1
-ta  '~2'  ~2
-ta '~+2' ~+2
-ta '~-2' ~-2
-ta  '~8'  ~8
-ta '~+8' ~+8
-ta '~-8' ~-8
+ts  '~1'  ~1
+ts '~+1' ~+1
+ts '~-1' ~-1
+ts  '~2'  ~2
+ts '~+2' ~+2
+ts '~-2' ~-2
+ts  '~8'  ~8
+ts '~+8' ~+8
+ts '~-8' ~-8
 }
 
 (unset -v HOME; ta '~' ~)
