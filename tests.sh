@@ -61,8 +61,10 @@ ts "~crl/"      ~crl/
 ts "~nobody"    ~nobody
 ts "~nobody/"   ~nobody/
 ts "~+"         ~+
+ts "~+0"        ~+0
 ts "~+/plus"    ~+/plus
 ts "~-"         ~-
+ts "~-0"        ~-0
 ts "~-/minus"   ~-/minus
 
 pt='~/foo:~/bar:~/baz'
