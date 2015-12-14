@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$1" = "-v" ]; then
-    v=$1
+if [ "${1:0:2}" = "-v" ]; then
+    v=${1:2}*
     shift
 fi
 
@@ -15,7 +15,12 @@ strexp() {
 
 t() {
     exp=$("$1" "$2")
-    if [ "$v" ]; then
+    local res=t
+    if [ "$3" != "$exp" ]; then
+        res=f
+    fi
+
+    if [[ "$res" = $v ]]; then
         printf \\n >&2
         printf 'Original: %s\n' "$2" >&2
         printf 'Expanded: %s\n' "$exp" >&2
