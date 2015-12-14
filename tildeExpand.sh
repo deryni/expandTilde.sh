@@ -25,7 +25,7 @@ doExpand() {
         path=$PWD${path#"~+"}
         ;;
       "~-"*)
-        path=$OLDPWD${path#"~-"}
+        path=${OLDPWD:-"~-"}${path#"~-"}
         ;;
       "~"*)
         local username=${path%%/*}
