@@ -1,33 +1,41 @@
 #!/bin/bash
 
+tildeuser() {
+    local username=${1%%/*}
+    IFS=: read -r _ _ _ _ _ homedir _ < <(getent passwd -- "${username:1}")
+    path=${homedir:-${1%%/*}}${1#$username}
+}
+
 tildecase() {
-    case $path in
+    case $1 in
         "~"|"~"/*)
-            path=${HOME-~}${path:1}
+            path=${HOME-~}${1:1}
             ;;
-        "~"[0-9]|"~"[+-][0-9])
-            local num=${path:1}
-            if [ "${num:0:1}" = "-" ]; then
-                ((num-=1))
+        "~"[0-9]*|"~"[+-][0-9]*)
+            local num=${1:1}
+            if [[ $num -eq $num ]] 2>/dev/null; then
+                if [ "${num:0:1}" = "-" ]; then
+                    ((num-=1))
+                fi
+                local opath=$1
+                path=${DIRSTACK[@]:$num:1}
+                # Handle the "special" case of ${DIRSTACK[0]} using unexpanded ~.
+                if [ "${path:0:1}" = "~" ]; then
+                    tildecase "$path"
+                fi
+                : "${path:=$opath}"
+            else
+                tildeuser "$1"
             fi
-            local opath=$path
-            path=${DIRSTACK[@]:$num:1}
-            # Handle the "special" case of ${DIRSTACK[0]} using unexpanded ~.
-            if [ "${path:0:1}" = "~" ]; then
-                tildecase "$path"
-            fi
-            : "${path:=$opath}"
             ;;
         "~+"*)
-            path=$PWD${path:2}
+            path=$PWD${1:2}
             ;;
         "~-"*)
-            path=${OLDPWD:-${path:0:2}}${path:2}
+            path=${OLDPWD:-${1:0:2}}${1:2}
             ;;
         "~"*)
-            local username=${path%%/*}
-            IFS=: read -r _ _ _ _ _ homedir _ < <(getent passwd "${username:1}")
-            path=${homedir:-${path%%/*}}${path#$username}
+            tildeuser "$1"
             ;;
     esac
 }
