@@ -7,16 +7,18 @@ tildecase() {
             ;;
         "~"[0-9]*|"~"[+-][0-9]*)
             local num=${path:1}
-            if [ "${num:0:1}" = "-" ]; then
-                ((num-=1))
+            if [[ $num -eq $num ]] 2>/dev/null; then
+                if [ "${num:0:1}" = "-" ]; then
+                    ((num-=1))
+                fi
+                local opath=$path
+                path=${DIRSTACK[@]:$num:1}
+                # Handle the "special" case of ${DIRSTACK[0]} using unexpanded ~.
+                if [ "${path:0:1}" = "~" ]; then
+                    tildecase
+                fi
+                : "${path:=$opath}"
             fi
-            local opath=$path
-            path=${DIRSTACK[@]:$num:1}
-            # Handle the "special" case of ${DIRSTACK[0]} using unexpanded ~.
-            if [ "${path:0:1}" = "~" ]; then
-                tildecase "$path"
-            fi
-            : "${path:=$opath}"
             ;;
         "~+"*)
             path=$PWD${path:2}
