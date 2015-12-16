@@ -1,5 +1,11 @@
 #!/bin/bash
 
+tildeuser() {
+    local username=${path%%/*}
+    IFS=: read -r _ _ _ _ _ homedir _ < <(getent passwd -- "${username:1}")
+    path=${homedir:-${path%%/*}}${path#$username}
+}
+
 tildecase() {
     case $path in
         "~"|"~"/*)
@@ -18,6 +24,8 @@ tildecase() {
                     tildecase
                 fi
                 : "${path:=$opath}"
+            else
+                tildeuser
             fi
             ;;
         "~+"*)
@@ -27,9 +35,7 @@ tildecase() {
             path=${OLDPWD:-${path:0:2}}${path:2}
             ;;
         "~"*)
-            local username=${path%%/*}
-            IFS=: read -r _ _ _ _ _ homedir _ < <(getent passwd "${username:1}")
-            path=${homedir:-${path%%/*}}${path#$username}
+            tildeuser
             ;;
     esac
 }
