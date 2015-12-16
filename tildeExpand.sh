@@ -1,41 +1,41 @@
 #!/bin/bash
 
 tildeuser() {
-    local username=${path%%/*}
+    local username=${1%%/*}
     IFS=: read -r _ _ _ _ _ homedir _ < <(getent passwd -- "${username:1}")
-    path=${homedir:-${path%%/*}}${path#$username}
+    path=${homedir:-${1%%/*}}${1#$username}
 }
 
 tildecase() {
-    case $path in
+    case $1 in
         "~"|"~"/*)
-            path=${HOME-~}${path:1}
+            path=${HOME-~}${1:1}
             ;;
         "~"[0-9]*|"~"[+-][0-9]*)
-            local num=${path:1}
+            local num=${1:1}
             if [[ $num -eq $num ]] 2>/dev/null; then
                 if [ "${num:0:1}" = "-" ]; then
                     ((num-=1))
                 fi
-                local opath=$path
+                local opath=$1
                 path=${DIRSTACK[@]:$num:1}
                 # Handle the "special" case of ${DIRSTACK[0]} using unexpanded ~.
                 if [ "${path:0:1}" = "~" ]; then
-                    tildecase
+                    tildecase "$path"
                 fi
                 : "${path:=$opath}"
             else
-                tildeuser
+                tildeuser "$1"
             fi
             ;;
         "~+"*)
-            path=$PWD${path:2}
+            path=$PWD${1:2}
             ;;
         "~-"*)
-            path=${OLDPWD:-${path:0:2}}${path:2}
+            path=${OLDPWD:-${1:0:2}}${1:2}
             ;;
         "~"*)
-            tildeuser
+            tildeuser "$1"
             ;;
     esac
 }
@@ -45,7 +45,7 @@ doExpand() {
     local -a resultPathElements
 
     for path in "$@"; do
-        tildecase
+        tildecase "$path"
         resultPathElements+=( "$path" )
     done
     local result
