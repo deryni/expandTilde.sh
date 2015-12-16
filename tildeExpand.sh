@@ -45,7 +45,7 @@ doExpand() {
     local -a resultPathElements
 
     for path in "$@"; do
-        tildecase "$path"
+        tildecase
         resultPathElements+=( "$path" )
     done
     local result
